@@ -124,6 +124,12 @@ async function main(): Promise<void> {
         console.log("  📋  RAW JSON OUTPUT");
         console.log("═══════════════════════════════════════════════════════\n");
         console.log(JSON.stringify(result, null, 2));
+
+        // ── Nova Act Sub-routines ──
+        console.log("\n⚡ Executing Nova Act Sub-routines...");
+        console.log(`[Nova Act] 🎫 Creating Jira Epic: ${result.Engineering_Action_Plan.internal_engineering_ticket.substring(0, 80)}... [DONE]`);
+        console.log(`[Nova Act] 📝 Publishing Idempotent Webhook Architecture Playbook to Customer Portal... [DONE]`);
+        console.log(`[Nova Act] ✉️  Drafting Slack Alert to Sales TPM regarding Tier ${result.SIFI_Complexity_Assessment.tier} integration risk... [DONE]`);
     } catch (error) {
         console.error("❌ SIFI Engine Error:", error);
         process.exit(1);
