@@ -2,7 +2,9 @@
   <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/Zod-3068B7?logo=zod&logoColor=white" alt="Zod" />
+  <img src="https://img.shields.io/badge/Gemini_2.5_Flash-4285F4?logo=google&logoColor=white" alt="Gemini" />
   <img src="https://img.shields.io/badge/OpenAI_SDK-412991?logo=openai&logoColor=white" alt="OpenAI SDK" />
+  <img src="https://img.shields.io/badge/Status-✅_Verified-brightgreen" alt="Verified" />
 </p>
 
 # 🚀 NovaEdge SIFI Engine
@@ -76,7 +78,7 @@ src/
 ```
 
 **Key design decisions:**
-- **LLM-agnostic**: Uses the OpenAI SDK but model is a single config swap (`gemini-3.1-pro` → `gpt-4o` → Amazon Nova Act)
+- **LLM-agnostic**: Uses the OpenAI SDK pointed at Google's OpenAI-compatible endpoint. Model is a single config swap (`gemini-2.5-flash` → `gemini-3.1-pro-preview` → Amazon Nova Act)
 - **Schema-first**: Zod schemas are the single source of truth — they generate both TypeScript types AND the JSON Schema sent to the LLM
 - **No post-hoc parsing**: Structured Outputs guarantee the shape at the API level, not via regex or `JSON.parse` hacks
 
@@ -87,7 +89,7 @@ src/
 ### Prerequisites
 
 - **Node.js** ≥ 18
-- An **OpenAI-compatible API key** (OpenAI, Google AI, etc.)
+- A **Google AI API key** (get one at [aistudio.google.com/apikey](https://aistudio.google.com/apikey))
 
 ### Setup
 
@@ -99,13 +101,15 @@ npm install
 
 # Configure your API key
 cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY
+# Edit .env:
+#   OPENAI_API_KEY=AIza...
+#   OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
 
 # Run the evaluation
 npx tsx src/index.ts
 ```
 
-### Example Output
+### Verified Output (gemini-2.5-flash)
 
 ```
 🚀 NovaEdge SIFI Engine — Evaluating integration...
@@ -118,18 +122,25 @@ npx tsx src/index.ts
   ✅  SIFI EVALUATION COMPLETE
 ═══════════════════════════════════════════════════════
 
-📊 SIFI Score: 21/25 → Tier: Black
+📊 SIFI Score: 23/25 → Tier: Black
 
    5/5  Protocol Antiquity
-         └─ Workday SOAP API with forced RaaS polling workaround...
+         └─ SOAP API, forced RaaS polling workaround
 
-   4/5  Schema Volatility
-         └─ Candidate merge events silently mutate records...
+   5/5  Schema Volatility
+         └─ Silent record mutations from M&A merge events
 
-   ...
+   4/5  Auth/Sandbox Friction
+         └─ IT blocking Outbound EIB
+
+   5/5  Error Observability
+         └─ Silent failures, no HTTP error codes
+
+   4/5  POC Tech Maturity
+         └─ HR Ops Lead, zero API experience
 
 💰 Commercial Proposal
-   Fee: $34,000
+   Fee: $40,000  ($8K base × 2.0× data × 2.5× Black penalty)
    Timeline: 10-16 weeks
 ```
 

@@ -36,7 +36,10 @@ const TEST_PAYLOAD: SifiInput = {
 // ═══════════════════════════════════════════════════════════════════════════
 
 async function evaluateIntegration(payload: SifiInput): Promise<SifiOutput> {
-    const client = new OpenAI();
+    const client = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+        baseURL: process.env.OPENAI_BASE_URL,
+    });
 
     console.log("🚀 NovaEdge SIFI Engine — Evaluating integration...\n");
     console.log(`   Vendor: ${payload.Integration_Scope.vendor_system}`);
@@ -48,7 +51,7 @@ async function evaluateIntegration(payload: SifiInput): Promise<SifiOutput> {
     );
 
     const completion = await client.chat.completions.parse({
-        model: "gemini-3.1-pro",
+        model: "gemini-2.5-flash",
         messages: [
             {
                 role: "system",
